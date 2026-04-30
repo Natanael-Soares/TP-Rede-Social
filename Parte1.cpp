@@ -12,7 +12,8 @@ struct Usuario
     int seguidores;
     bool ativo; // true = conta ativa, false = conta suspensa
 };
-void lerUsuarios(Usuario *v, int n)
+  
+void lerUsuarios(Usuario *v, int n) //Lê nome, e-mail, id, número de seguidores e a atividade de cada usuário.
 {
     if (v != nullptr)
     {
@@ -37,7 +38,7 @@ void lerUsuarios(Usuario *v, int n)
         }
     }
 }
-void exibirUsuarios(const Usuario *v, int n)
+void exibirUsuarios(const Usuario *v, int n) //Exibe todos os campos de cada usuário.
 {
     string Ativo;
     if (v != nullptr)
@@ -58,7 +59,7 @@ void exibirUsuarios(const Usuario *v, int n)
         }
     }
 }
-Usuario *buscarUsuarioPorId(Usuario *v, int n, int id)
+Usuario *buscarUsuarioPorId(Usuario *v, int n, int id) //Busca por um usuário usando seu ID.
 {
     Usuario *procurado;
     if (v != nullptr)
@@ -75,7 +76,7 @@ Usuario *buscarUsuarioPorId(Usuario *v, int n, int id)
         }
     }
 }
-void suspenderUsuario(Usuario *u)
+void suspenderUsuario(Usuario *u) //Suspende um usuário marcando seu campo ativo como false caso seja true, e emite um aviso caso contrário
 {
     if (u != nullptr)
     {
@@ -90,7 +91,7 @@ void suspenderUsuario(Usuario *u)
         }
     }
 }
-void reativarUsuario(Usuario *u)
+void reativarUsuario(Usuario *u) //Reativa um usuário marcando seu campo ativo como true caso seja false, e emite um aviso caso contrário
 {
     if(u!=nullptr){
         if(u->ativo==false){
