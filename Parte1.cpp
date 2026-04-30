@@ -99,6 +99,14 @@ void suspenderUsuario(Usuario *u)
 }
 void reativarUsuario(Usuario *u)
 {
+    if(u!=nullptr){
+        if(u->ativo==false){
+            u->ativo=true;
+        }
+        else{
+            cout<<"O usuario ja esta ativo."<<endl;
+        }
+    }
 }
 
 // Fim da Parte do Natanael e começo da parte do Marcus
