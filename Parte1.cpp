@@ -12,16 +12,6 @@ struct Usuario
     int seguidores;
     bool ativo; // true = conta ativa, false = conta suspensa
 };
-
-struct Post
-{
-    string conteudo; // texto do post
-    int id;
-    int idAutor; // id do Usuario que criou o post
-    int curtidas;
-    bool publico; // true = vis´ıvel para todos, false = apenas seguidores
-};
-
 void lerUsuarios(Usuario *v, int n)
 {
     if (v != nullptr)
@@ -114,6 +104,17 @@ void suspenderUsuario(Usuario *u)
 void reativarUsuario(Usuario *u)
 {
 }
+
+struct Post
+{
+    string conteudo; // texto do post
+    int id;
+    int idAutor; // id do Usuario que criou o post
+    int curtidas;
+    bool publico; // true = vis´ıvel para todos, false = apenas seguidores
+};
+
+
 
 int main()
 {
