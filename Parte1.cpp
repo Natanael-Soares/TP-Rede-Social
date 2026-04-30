@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-//Só organizando a formatação
+// Só organizando a formatação
 
 struct Usuario
 {
@@ -41,7 +41,6 @@ void lerUsuarios(Usuario *v, int n)
         cout << "Erro de entrada de dados" << endl;
     }
 }
-
 void exibirUsuarios(const Usuario *v, int n)
 {
     string Ativo;
@@ -67,7 +66,6 @@ void exibirUsuarios(const Usuario *v, int n)
         cout << "Erro de entrada de dados" << endl;
     }
 }
-
 Usuario *buscarUsuarioPorId(Usuario *v, int n, int id)
 {
     Usuario *procurado;
@@ -85,7 +83,6 @@ Usuario *buscarUsuarioPorId(Usuario *v, int n, int id)
         }
     }
 }
-
 void suspenderUsuario(Usuario *u)
 {
     if (u != nullptr)
@@ -100,10 +97,11 @@ void suspenderUsuario(Usuario *u)
         }
     }
 }
-
 void reativarUsuario(Usuario *u)
 {
 }
+
+// Fim da Parte do Natanael e começo da parte do Marcus
 
 struct Post
 {
@@ -113,8 +111,41 @@ struct Post
     int curtidas;
     bool publico; // true = vis´ıvel para todos, false = apenas seguidores
 };
+void lerPosts(Post *v, int p, const Usuario *usuarios, int n)
+{
+}
+void exibirPosts(const Post *v, int p, const Usuario *usuarios, int n)
+{
+}
+void curtir(Post *p)
+{
+}
+Post *buscarPostPorId(Post *v, int p, int id)
+{
+}
+int contarPostsDeUsuario(const Post *v, int p, int idUsuario)
+{
+}
+void ocultarPost(Post *p)
+{
+}
+void publicarPost(Post *p)
+{
+}
 
+// Fim da Parte do Marcus e começo da parte do Kauan
 
+void registrarCurtida(int **m, int idUsuario, const Usuario *usuarios, int n, int idPost, Post *posts, int p)
+{
+}
+void exibirMatriz(int **m, int n, int p)
+{
+}
+void liberarMatriz(int **m, int linhas)
+{
+}
+
+// Fim da Parte do Kauan e começo da parte do Pedro
 
 int main()
 {
@@ -122,10 +153,27 @@ int main()
     cout << "Quantos usuarios? " << endl;
     cin >> n;
     Usuario *usuarios = new Usuario[n];
-    // Resto do código
-    //.
-    //.
-    //.
+    
+    // Menu Esperado:
+
+    //========================================
+    //SocialCEFET -- Menu
+    //========================================
+    //1. Listar usuarios
+    //2. Listar posts (feed completo)
+    //3. Buscar usuario por ID
+    //4. Suspender usuario
+    //5. Reativar usuario
+    //6. Buscar post por ID
+    //7. Ocultar post
+    //8. Publicar post
+    //9. Exibir feed publico (filtrado)
+    //10. Registrar curtida
+    //11. Exibir matriz de curtidas
+    //0. Sair
+    //----------------------------------------
+    //Opcao: _
+
     delete[] usuarios;
     return 0;
 }
