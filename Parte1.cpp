@@ -36,10 +36,6 @@ void lerUsuarios(Usuario *v, int n)
             cout << endl;
         }
     }
-    else
-    {
-        cout << "Erro de entrada de dados" << endl;
-    }
 }
 void exibirUsuarios(const Usuario *v, int n)
 {
@@ -58,12 +54,8 @@ void exibirUsuarios(const Usuario *v, int n)
             {
                 Ativo = "conta suspensa";
             }
-            cout << "|Status:" << Ativo;
+            cout << "|Status:" << Ativo<<endl;
         }
-    }
-    else
-    {
-        cout << "Erro de entrada de dados" << endl;
     }
 }
 Usuario *buscarUsuarioPorId(Usuario *v, int n, int id)
@@ -90,10 +82,11 @@ void suspenderUsuario(Usuario *u)
         if (u->ativo == true)
         {
             u->ativo = false;
+            cout<<"Usuario "<<u->username<<" suspenso com sucesso."<<endl;
         }
         else
         {
-            cout << "O usuario ja esta suspenso." << endl;
+            cout << "Aviso: a conta "<< u->username<<" ja esta suspensa."<< endl;
         }
     }
 }
@@ -102,9 +95,10 @@ void reativarUsuario(Usuario *u)
     if(u!=nullptr){
         if(u->ativo==false){
             u->ativo=true;
+            cout<<"Usuario "<<u->username<<" reativado com sucesso."<<endl;
         }
         else{
-            cout<<"O usuario ja esta ativo."<<endl;
+            cout<<"Aviso: a conta "<<u->username<<" ja esta ativa."<<endl;
         }
     }
 }
