@@ -183,5 +183,6 @@ int main()
     //Opcao: _
 
     delete[] usuarios;
+    usuarios=nullptr;
     return 0;
 }
