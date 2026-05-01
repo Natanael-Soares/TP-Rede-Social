@@ -31,7 +31,7 @@ void lerUsuarios(Usuario *v, int n)
             cout << "seguidores:" << endl;
             cin >> (v + i)->seguidores;
             cout << endl;
-            cout << "on-line?" << endl;
+            cout << "Digite 1 para Sim e 0 para Nao" << endl << "on-line?";
             cin >> (v + i)->ativo;
             cout << endl;
         }
@@ -121,6 +121,30 @@ struct Post
 };
 void lerPosts(Post *v, int p, const Usuario *usuarios, int n)
 {
+        for (size_t i = 0; i < p; i++){
+
+                if (usuarios[n].ativo == true){
+                    cout << "Post " << i + 1 << ":" << endl;
+                    cout << "Conteudo:" << endl;
+                    cin >> (v + i)->conteudo;
+                    cout << endl;
+
+                    cout << "Id:" << endl;
+                    cin >> (v + i)->id;
+                    cout << endl;
+
+                    v[i].idAutor = usuarios[n].id;
+
+                    cout << "Curtidas:" << endl;
+                    cin >> (v + i)->curtidas;
+                    cout << endl;
+
+                    cout << "Digite 1 para Sim e 0 para Nao" << endl <<     "Publico?";
+                    cin >> (v + i)->publico;
+                    cout << endl;
+                }
+    }
+    
 }
 void exibirPosts(const Post *v, int p, const Usuario *usuarios, int n)
 {
