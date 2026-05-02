@@ -12,7 +12,8 @@ struct Usuario
     int seguidores;
     bool ativo; // true = conta ativa, false = conta suspensa
 };
-void lerUsuarios(Usuario *v, int n)
+  
+void lerUsuarios(Usuario *v, int n) //Lê nome, e-mail, id, número de seguidores e a atividade de cada usuário.
 {
     if (v != nullptr)
     {
@@ -36,12 +37,8 @@ void lerUsuarios(Usuario *v, int n)
             cout << endl;
         }
     }
-    else
-    {
-        cout << "Erro de entrada de dados" << endl;
-    }
 }
-void exibirUsuarios(const Usuario *v, int n)
+void exibirUsuarios(const Usuario *v, int n) //Exibe todos os campos de cada usuário.
 {
     string Ativo;
     if (v != nullptr)
@@ -58,15 +55,11 @@ void exibirUsuarios(const Usuario *v, int n)
             {
                 Ativo = "conta suspensa";
             }
-            cout << "|Status:" << Ativo;
+            cout << "|Status:" << Ativo<<endl;
         }
     }
-    else
-    {
-        cout << "Erro de entrada de dados" << endl;
-    }
 }
-Usuario *buscarUsuarioPorId(Usuario *v, int n, int id)
+Usuario *buscarUsuarioPorId(Usuario *v, int n, int id) //Busca por um usuário usando seu ID.
 {
     Usuario *procurado;
     if (v != nullptr)
@@ -83,28 +76,30 @@ Usuario *buscarUsuarioPorId(Usuario *v, int n, int id)
         }
     }
 }
-void suspenderUsuario(Usuario *u)
+void suspenderUsuario(Usuario *u) //Suspende um usuário marcando seu campo ativo como false caso seja true, e emite um aviso caso contrário
 {
     if (u != nullptr)
     {
         if (u->ativo == true)
         {
             u->ativo = false;
+            cout<<"Usuario "<<u->username<<" suspenso com sucesso."<<endl;
         }
         else
         {
-            cout << "O usuario ja esta suspenso." << endl;
+            cout << "Aviso: a conta "<< u->username<<" ja esta suspensa."<< endl;
         }
     }
 }
-void reativarUsuario(Usuario *u)
+void reativarUsuario(Usuario *u) //Reativa um usuário marcando seu campo ativo como true caso seja false, e emite um aviso caso contrário
 {
     if(u!=nullptr){
         if(u->ativo==false){
             u->ativo=true;
+            cout<<"Usuario "<<u->username<<" reativado com sucesso."<<endl;
         }
         else{
-            cout<<"O usuario ja esta ativo."<<endl;
+            cout<<"Aviso: a conta "<<u->username<<" ja esta ativa."<<endl;
         }
     }
 }
