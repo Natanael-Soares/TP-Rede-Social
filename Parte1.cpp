@@ -2,39 +2,38 @@
 #include <string>
 using namespace std;
 
-// Só organizando a formatação
-
 struct Usuario
 {
     string username;
     string email;
     int id;
     int seguidores;
-    bool ativo; // true = conta ativa, false = conta suspensa
+    bool ativo = true; // true = conta ativa, false = conta suspensa
 };
-  
 void lerUsuarios(Usuario *v, int n) //Lê nome, e-mail, id, número de seguidores e a atividade de cada usuário.
 {
     if (v != nullptr)
     {
+        cout << "--- Cadastro de usuarios ---" << endl;
         for (int i = 0; i < n; i++)
         {
             cout << "Usuario " << i + 1 << ":" << endl;
-            cout << "Nome:" << endl;
+
+            cout << "Username: ";
             cin >> (v + i)->username;
             cout << endl;
-            cout << "email:" << endl;
+
+            cout << "Email: ";
             cin >> (v + i)->email;
             cout << endl;
-            cout << "id:" << endl;
-            cin >> (v + i)->id;
+
+            v[i].id = 1+i;
             cout << endl;
-            cout << "seguidores:" << endl;
+
+            cout << "Seguidores: ";
             cin >> (v + i)->seguidores;
             cout << endl;
-            cout << "Digite 1 para Sim e 0 para Nao" << endl << "on-line?";
-            cin >> (v + i)->ativo;
-            cout << endl;
+
         }
     }
 }
@@ -61,7 +60,7 @@ void exibirUsuarios(const Usuario *v, int n) //Exibe todos os campos de cada usu
 }
 Usuario *buscarUsuarioPorId(Usuario *v, int n, int id) //Busca por um usuário usando seu ID.
 {
-    Usuario *procurado;
+    Usuario *procurado = nullptr;
     if (v != nullptr)
     {
         for (int i = 0; i < n; i++)
@@ -114,32 +113,50 @@ struct Post
     int curtidas;
     bool publico; // true = vis´ıvel para todos, false = apenas seguidores
 };
-void lerPosts(Post *v, int p, const Usuario *usuarios, int n)
+void lerPosts(Post *v, int p, Usuario *usuarios, int n)
 {
+    if (v != nullptr){
+        cout << "--- Cadastro de posts ---" << endl;
+
         for (size_t i = 0; i < p; i++){
+            cout << "Post " << i + 1 << ":" << endl;
 
-                if (usuarios[n].ativo == true){
-                    cout << "Post " << i + 1 << ":" << endl;
-                    cout << "Conteudo:" << endl;
-                    cin >> (v + i)->conteudo;
-                    cout << endl;
+            int id;
+            Usuario* usuarioPublicador = nullptr;
 
-                    cout << "Id:" << endl;
-                    cin >> (v + i)->id;
-                    cout << endl;
+            //verifica o ID do autor antes da leitura do Post
+            cout << "ID do autor: ";
+            cin >> id;
+            cout << endl;
 
-                    v[i].idAutor = usuarios[n].id;
+            //Verifica se o Autor existe
+            usuarioPublicador = buscarUsuarioPorId(usuarios,n,id);
+                if(usuarioPublicador != nullptr){
 
-                    cout << "Curtidas:" << endl;
-                    cin >> (v + i)->curtidas;
-                    cout << endl;
+                    //Verifica se ele está ativo
+                    if (usuarioPublicador->ativo == true){
+                        cout << "Autor encontrado:" << usuarioPublicador->username << endl;
+                        v[i].idAutor = usuarioPublicador->id;
 
-                    cout << "Digite 1 para Sim e 0 para Nao" << endl <<     "Publico?";
-                    cin >> (v + i)->publico;
-                    cout << endl;
+                        cout << "Conteudo:";
+                        cin >> (v + i)->conteudo;
+                        cout << endl;
+
+                        v[i].curtidas = 0;
+
+                        v[i].id = 1+i;
+
+                        cout << "Visibilidade (1-Publico / 0-Apenas seguidores): ";
+                        cin >> (v + i)->publico;
+                        cout << endl;
+                    }
+                    cout << endl << "Usuario: " << usuarioPublicador->username << " Suspenso.";
                 }
+            //Caso id não for encontrado retrocede o codigo a i - 1(Volta ao cadastramento do mesmo post)
+            cout << "Erro: usuario com ID " << id << " nao encontrado. Informe novamente.";
+            i--;
+        }
     }
-    
 }
 void exibirPosts(const Post *v, int p, const Usuario *usuarios, int n)
 {
@@ -147,8 +164,8 @@ void exibirPosts(const Post *v, int p, const Usuario *usuarios, int n)
 void curtir(Post *p)
 {
 }
-Post *buscarPostPorId(Post *v, int p, int id)
-{
+Post *buscarPostPorId(Post *v, int p, int id){
+    
 }
 int contarPostsDeUsuario(const Post *v, int p, int idUsuario)
 {
