@@ -158,8 +158,23 @@ void lerPosts(Post *v, int p, Usuario *usuarios, int n)
         }
     }
 }
-void exibirPosts(const Post *v, int p, const Usuario *usuarios, int n)
+void exibirPosts(const Post *v, int p, Usuario *usuarios, int n)
 {
+    if (v != nullptr){
+        cout << "--- Feed completo ---" << endl;
+
+        for (size_t i = 0; i < p; i++){
+            //busca o Usuario publicador
+            Usuario* usuarioPublicador =  buscarUsuarioPorId(usuarios,n,v[i].idAutor);
+            //exibindo post
+            cout << "[POST " << v[i].id << "] ";
+            cout << "@" << usuarioPublicador->username << ": ";
+            cout << "\"" << v[i].conteudo << "\"";
+            cout << "   |   Curtidas: " << v[i].curtidas << endl;
+            cout << "Visibilidade: " << v[i].publico ? "Publico" : "Apenas seguidores";
+            cout << endl;
+        } 
+    }
 }
 void curtir(Post *p)
 {
