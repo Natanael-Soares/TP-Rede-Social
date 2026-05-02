@@ -178,18 +178,40 @@ void exibirPosts(const Post *v, int p, Usuario *usuarios, int n)
 }
 void curtir(Post *p)
 {
+    p->curtidas++;
 }
 Post *buscarPostPorId(Post *v, int p, int id){
-    
+    Post *procurado = nullptr;
+    if (v != nullptr)
+    {
+        for (int i = 0; i < p; i++)
+        {
+            if ((v + i)->id == id)
+            {
+                procurado = (v + i);
+                return procurado;
+            }
+            cout << "Post nao encontrado." << endl;
+            return nullptr;
+        }
+    }
 }
 int contarPostsDeUsuario(const Post *v, int p, int idUsuario)
 {
+    int acm = 0;
+    for (size_t i = 0; i < p; i++){
+        if (idUsuario == v[i].idAutor)
+            acm++;
+    }
+    return acm;
 }
 void ocultarPost(Post *p)
 {
+    p->publico = false;
 }
 void publicarPost(Post *p)
 {
+    p->publico = true;
 }
 
 // Fim da Parte do Marcus e começo da parte do Kauan
