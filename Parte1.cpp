@@ -215,15 +215,37 @@ void publicarPost(Post *p)
 }
 Post* filtrarPublicos(const Post* v, int p, int* qtd)
 {
-    Post *filtrados[*qtd];
+    //contando publicos
+    int total = 0;
+    for (int i = 0; i < p; i++){
+        if (v[i].publico){
+            total++;
+        }
+    }
 
-    for (size_t i = 0; i < p; i++){
+    //alterando o valor da referencia
+    *qtd = total;
+    if (total == 0){
+        return nullptr;
+    }
+
+    //alocando os publicos
+    Post *filtrados = new Post[total];
+    int j = 0;
+    for (int i = 0; i < p; i++){
         if (v[i].publico){
             filtrados[i] = v[i];
         }
     }
-    return *filtrados;
+
+    //Liberando filtrados
+    Post *temp = filtrados;
+    delete[] filtrados;
+    filtrados=nullptr;
+
+    return temp;
 }
+
 // Fim da Parte do Marcus e começo da parte do Kauan
 
 void registrarCurtida(int **m, int idUsuario, const Usuario *usuarios, int n, int idPost, Post *posts, int p)
