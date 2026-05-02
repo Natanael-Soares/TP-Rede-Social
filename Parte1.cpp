@@ -213,7 +213,17 @@ void publicarPost(Post *p)
 {
     p->publico = true;
 }
+Post* filtrarPublicos(const Post* v, int p, int* qtd)
+{
+    Post *filtrados[*qtd];
 
+    for (size_t i = 0; i < p; i++){
+        if (v[i].publico){
+            filtrados[i] = v[i];
+        }
+    }
+    return *filtrados;
+}
 // Fim da Parte do Marcus e começo da parte do Kauan
 
 void registrarCurtida(int **m, int idUsuario, const Usuario *usuarios, int n, int idPost, Post *posts, int p)
