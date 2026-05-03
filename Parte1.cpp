@@ -71,9 +71,9 @@ Usuario *buscarUsuarioPorId(Usuario *v, int n, int id) //Busca por um usuário u
                 return procurado;
             }
             cout << "Usuario nao encontrado." << endl;
-            return nullptr;
         }
     }
+    return nullptr;
 }
 void suspenderUsuario(Usuario *u) //Suspende um usuário marcando seu campo ativo como false caso seja true, e emite um aviso caso contrário
 {
@@ -118,7 +118,7 @@ void lerPosts(Post *v, int p, Usuario *usuarios, int n)
     if (v != nullptr){
         cout << "--- Cadastro de posts ---" << endl;
 
-        for (size_t i = 0; i < p; i++){
+        for (int i = 0; i < p; i++){
             cout << "Post " << i + 1 << ":" << endl;
 
             int id;
@@ -163,7 +163,7 @@ void exibirPosts(const Post *v, int p, Usuario *usuarios, int n)
     if (v != nullptr){
         cout << "--- Feed completo ---" << endl;
 
-        for (size_t i = 0; i < p; i++){
+        for (int i = 0; i < p; i++){
             //busca o Usuario publicador
             Usuario* usuarioPublicador =  buscarUsuarioPorId(usuarios,n,v[i].idAutor);
             //exibindo post
@@ -171,7 +171,7 @@ void exibirPosts(const Post *v, int p, Usuario *usuarios, int n)
             cout << "@" << usuarioPublicador->username << ": ";
             cout << "\"" << v[i].conteudo << "\"";
             cout << "   |   Curtidas: " << v[i].curtidas << endl;
-            cout << "Visibilidade: " << v[i].publico ? "Publico" : "Apenas seguidores";
+            cout << "Visibilidade: " << (v[i].publico ? "Publico" : "Apenas seguidores");
             cout << endl;
         } 
     }
@@ -192,14 +192,14 @@ Post *buscarPostPorId(Post *v, int p, int id){
                 return procurado;
             }
             cout << "Post nao encontrado." << endl;
-            return nullptr;
         }
     }
+    return nullptr;
 }
 int contarPostsDeUsuario(const Post *v, int p, int idUsuario)
 {
     int acm = 0;
-    for (size_t i = 0; i < p; i++){
+    for (int i = 0; i < p; i++){
         if (idUsuario == v[i].idAutor)
             acm++;
     }
@@ -231,7 +231,6 @@ Post* filtrarPublicos(const Post* v, int p, int* qtd)
 
     //alocando os publicos
     Post *filtrados = new Post[total];
-    int j = 0;
     for (int i = 0; i < p; i++){
         if (v[i].publico){
             filtrados[i] = v[i];
