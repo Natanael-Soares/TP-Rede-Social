@@ -249,6 +249,8 @@ Post* filtrarPublicos(const Post* v, int p, int* qtd)
 
 void registrarCurtida(int **m, int idUsuario, const Usuario *usuarios, int n, int idPost, Post *posts, int p)
 {
+
+    
 }
 void exibirMatriz(int **m, int n, int p)
 {
