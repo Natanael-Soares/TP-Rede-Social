@@ -249,7 +249,6 @@ Post* filtrarPublicos(const Post* v, int p, int* qtd)
 
 void registrarCurtida(int **m, int idUsuario, const Usuario *usuarios, int n, int idPost, Post *posts, int p)
 {
-    
     // Matriz de curtidas: m[idUsuario][idPost] = 1 se o usuário curtiu o post, ou 0 caso contrário.
 }
 void exibirMatriz(int **m, int n, int p)
