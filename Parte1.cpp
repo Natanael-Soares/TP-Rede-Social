@@ -228,37 +228,30 @@ Post *filtrarPublicos(const Post *v, int p, int *qtd)
 {
     // contando publicos
     int total = 0;
-    for (int i = 0; i < p; i++)
-    {
-        if (v[i].publico)
-        {
+    
+    for (int i = 0; i < p; i++){
+        if (v[i].publico){
             total++;
         }
     }
 
     // alterando o valor da referencia
     *qtd = total;
-    if (total == 0)
-    {
+
+    if (total == 0){
         return nullptr;
     }
 
     // alocando os publicos
     Post *filtrados = new Post[total];
-    for (int i = 0; i < p; i++)
-    {
-        if (v[i].publico)
-        {
+
+    for (int i = 0; i < p; i++){
+        if (v[i].publico){
             filtrados[i] = v[i];
         }
     }
 
-    // Liberando filtrados
-    Post *temp = filtrados;
-    delete[] filtrados;
-    filtrados = nullptr;
-
-    return temp;
+    return filtrados;
 }
 
 // Fim da Parte do Marcus e começo da parte do Kauan
