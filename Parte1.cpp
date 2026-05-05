@@ -285,7 +285,7 @@ int **criarMatriz(int linhas, int colunas)
 
     return m;
 }
-void registrarCurtida(int **m, int idUsuario, const Usuario *usuarios, int n, int idPost, Post *posts, int p)
+void registrarCurtida(int **m, int idUsuario, Usuario *usuarios, int n, int idPost, Post *posts, int p)
 {
 
     if (m == nullptr || usuarios == nullptr || posts == nullptr){
@@ -293,7 +293,7 @@ void registrarCurtida(int **m, int idUsuario, const Usuario *usuarios, int n, in
         return;
     }
 
-    Usuario *u = buscarUsuarioPorId((Usuario *)usuarios, n, idUsuario);
+    Usuario *u = buscarUsuarioPorId(usuarios, n, idUsuario);
     if (u == nullptr){
         cout << "Erro: usuario com ID " << idUsuario << " nao encontrado." << endl;
         return;
