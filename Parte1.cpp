@@ -268,7 +268,7 @@ int **criarMatriz(int linhas, int colunas)
     if (linhas <= 0 || colunas <= 0)
     {
         cout << "Erro: dimensoes invalidas." << endl;
-        return NULL;
+        return nullptr;
     }
 
     int **m = new int *[linhas];
@@ -285,46 +285,38 @@ int **criarMatriz(int linhas, int colunas)
 
     return m;
 }
-
-void registrarCurtida(int **m, int idUsuario, const Usuario *usuarios, int n,
-                      int idPost, Post *posts, int p)
+void registrarCurtida(int **m, int idUsuario, const Usuario *usuarios, int n, int idPost, Post *posts, int p)
 {
 
-    if (m == nullptr || usuarios == nullptr || posts == nullptr)
-    {
+    if (m == nullptr || usuarios == nullptr || posts == nullptr){
         cout << "Erro: ponteiro invalido." << endl;
         return;
     }
 
     Usuario *u = buscarUsuarioPorId((Usuario *)usuarios, n, idUsuario);
-    if (u == nullptr)
-    {
+    if (u == nullptr){
         cout << "Erro: usuario com ID " << idUsuario << " nao encontrado." << endl;
         return;
     }
 
     Post *post = buscarPostPorId(posts, p, idPost);
-    if (post == nullptr)
-    {
+    if (post == nullptr){
         cout << "Erro: post com ID " << idPost << " nao encontrado." << endl;
         return;
     }
 
-    if (!u->ativo)
-    {
+    if (!u->ativo){
         cout << "Erro: usuario @" << u->username
              << " esta suspenso e nao pode curtir posts." << endl;
         return;
     }
 
-    if (!post->publico)
-    {
+    if (!post->publico){
         cout << "Erro: apenas posts publicos podem receber curtidas." << endl;
         return;
     }
 
-    if (m[idUsuario - 1][idPost - 1] == 1)
-    {
+    if (m[idUsuario - 1][idPost - 1] == 1){
         cout << "Aviso: o usuario @" << u->username
              << " ja curtiu o post [" << idPost << "]." << endl;
         return;
@@ -335,7 +327,6 @@ void registrarCurtida(int **m, int idUsuario, const Usuario *usuarios, int n,
 
     cout << "Curtida registrada com sucesso." << endl;
 }
-
 void exibirMatriz(int **m, int n, int p)
 {
     if (m == nullptr)
@@ -366,7 +357,6 @@ void exibirMatriz(int **m, int n, int p)
         cout << "]" << endl;
     }
 }
-
 void liberarMatriz(int **m, int linhas)
 {
     if (m == nullptr)
