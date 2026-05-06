@@ -367,32 +367,197 @@ void liberarMatriz(int **m, int linhas)
 
 int main()
 {
-    int n;
-    cout << "Quantos usuarios? " << endl;
+    int n, p;
+
+    cout << "Quantos usuarios? ";
     cin >> n;
     Usuario *usuarios = new Usuario[n];
 
-    // Menu Esperado:
+    lerUsuarios(usuarios, n);
 
-    //========================================
-    // SocialCEFET -- Menu
-    //========================================
-    // 1. Listar usuarios
-    // 2. Listar posts (feed completo)
-    // 3. Buscar usuario por ID
-    // 4. Suspender usuario
-    // 5. Reativar usuario
-    // 6. Buscar post por ID
-    // 7. Ocultar post
-    // 8. Publicar post
-    // 9. Exibir feed publico (filtrado)
-    // 10. Registrar curtida
-    // 11. Exibir matriz de curtidas
-    // 0. Sair
-    //----------------------------------------
-    // Opcao: _
+    cout << "\nQuantos posts? ";
+    cin >> p;
+    Post *posts = new Post[p];
 
+    lerPosts(posts, p, usuarios, n);
+
+    // cria matriz de curtidas (usuarios x posts)
+    int **matrizCurtidas = criarMatriz(n, p);
+
+    int opcao;
+
+    do
+    {
+        cout << "\n========================================" << endl;
+        cout << "SocialCEFET -- Menu" << endl;
+        cout << "========================================" << endl;
+        cout << "1. Listar usuarios" << endl;
+        cout << "2. Listar posts (feed completo)" << endl;
+        cout << "3. Buscar usuario por ID" << endl;
+        cout << "4. Suspender usuario" << endl;
+        cout << "5. Reativar usuario" << endl;
+        cout << "6. Buscar post por ID" << endl;
+        cout << "7. Ocultar post" << endl;
+        cout << "8. Publicar post" << endl;
+        cout << "9. Exibir feed publico (filtrado)" << endl;
+        cout << "10. Registrar curtida" << endl;
+        cout << "11. Exibir matriz de curtidas" << endl;
+        cout << "0. Sair" << endl;
+        cout << "----------------------------------------" << endl;
+        cout << "Opcao: ";
+        cin >> opcao;
+
+        switch (opcao)
+        {
+        case 1:
+            exibirUsuarios(usuarios, n);
+            break;
+
+        case 2:
+            exibirPosts(posts, p, usuarios, n);
+            break;
+
+        case 3:
+        {
+            int id;
+            cout << "Digite o ID do usuario: ";
+            cin >> id;
+
+            Usuario *u = buscarUsuarioPorId(usuarios, n, id);
+
+            if (u != nullptr)
+            {
+                cout << "Usuario encontrado: @" << u->username << endl;
+            }
+            else
+            {
+                cout << "Usuario nao encontrado." << endl;
+            }
+            break;
+        }
+
+        case 4:
+        {
+            int id;
+            cout << "ID do usuario para suspender: ";
+            cin >> id;
+
+            Usuario *u = buscarUsuarioPorId(usuarios, n, id);
+            suspenderUsuario(u);
+            break;
+        }
+
+        case 5:
+        {
+            int id;
+            cout << "ID do usuario para reativar: ";
+            cin >> id;
+
+            Usuario *u = buscarUsuarioPorId(usuarios, n, id);
+            reativarUsuario(u);
+            break;
+        }
+
+        case 6:
+        {
+            int id;
+            cout << "Digite o ID do post: ";
+            cin >> id;
+
+            Post *post = buscarPostPorId(posts, p, id);
+
+            if (post != nullptr)
+            {
+                cout << "Post encontrado: " << post->conteudo << endl;
+            }
+            else
+            {
+                cout << "Post nao encontrado." << endl;
+            }
+            break;
+        }
+
+        case 7:
+        {
+            int id;
+            cout << "ID do post para ocultar: ";
+            cin >> id;
+
+            Post *post = buscarPostPorId(posts, p, id);
+            if (post != nullptr)
+            {
+                ocultarPost(post);
+                cout << "Post ocultado com sucesso." << endl;
+            }
+            break;
+        }
+
+        case 8:
+        {
+            int id;
+            cout << "ID do post para publicar: ";
+            cin >> id;
+
+            Post *post = buscarPostPorId(posts, p, id);
+            if (post != nullptr)
+            {
+                publicarPost(post);
+                cout << "Post publicado com sucesso." << endl;
+            }
+            break;
+        }
+
+        case 9:
+        {
+            int qtdPublicos;
+            Post *publicos = filtrarPublicos(posts, p, &qtdPublicos);
+
+            if (publicos == nullptr)
+            {
+                cout << "Nao ha posts publicos." << endl;
+            }
+            else
+            {
+                exibirPosts(publicos, qtdPublicos, usuarios, n);
+                delete[] publicos;
+            }
+            break;
+        }
+
+        case 10:
+        {
+            int idUsuario, idPost;
+
+            cout << "ID do usuario: ";
+            cin >> idUsuario;
+
+            cout << "ID do post: ";
+            cin >> idPost;
+
+            registrarCurtida(matrizCurtidas, idUsuario, usuarios, n, idPost, posts, p);
+            break;
+        }
+
+        case 11:
+            exibirMatriz(matrizCurtidas, n, p);
+            break;
+
+        case 0:
+            cout << "Encerrando programa..." << endl;
+            break;
+
+        default:
+            cout << "Opcao invalida." << endl;
+        }
+
+    } while (opcao != 0);
+
+    liberarMatriz(matrizCurtidas, n);
+    delete[] posts;
     delete[] usuarios;
+
+    posts = nullptr;
     usuarios = nullptr;
+
     return 0;
 }
