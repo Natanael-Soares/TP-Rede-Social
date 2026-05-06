@@ -369,12 +369,14 @@ int main()
 {
     int n, p;
 
+    //Cria e le usuarios
     cout << "Quantos usuarios? ";
     cin >> n;
     Usuario *usuarios = new Usuario[n];
 
     lerUsuarios(usuarios, n);
 
+    //Cria e le posts
     cout << "\nQuantos posts? ";
     cin >> p;
     Post *posts = new Post[p];
@@ -386,8 +388,7 @@ int main()
 
     int opcao;
 
-    do
-    {
+    do{
         cout << "\n========================================" << endl;
         cout << "SocialCEFET -- Menu" << endl;
         cout << "========================================" << endl;
@@ -407,8 +408,7 @@ int main()
         cout << "Opcao: ";
         cin >> opcao;
 
-        switch (opcao)
-        {
+        switch (opcao){
         case 1:
             exibirUsuarios(usuarios, n);
             break;
@@ -418,7 +418,6 @@ int main()
             break;
 
         case 3:
-        {
             int id;
             cout << "Digite o ID do usuario: ";
             cin >> id;
@@ -426,17 +425,13 @@ int main()
             Usuario *u = buscarUsuarioPorId(usuarios, n, id);
 
             if (u != nullptr)
-            {
                 cout << "Usuario encontrado: @" << u->username << endl;
-            }
-            else
-            {
+            else{
                 cout << "Usuario nao encontrado." << endl;
             }
             break;
-        }
+
         case 4:
-        {
             int id;
             cout << "ID do usuario para suspender: ";
             cin >> id;
@@ -444,9 +439,8 @@ int main()
             Usuario *u = buscarUsuarioPorId(usuarios, n, id);
             suspenderUsuario(u);
             break;
-        }
+
         case 5:
-        {
             int id;
             cout << "ID do usuario para reativar: ";
             cin >> id;
@@ -454,9 +448,8 @@ int main()
             Usuario *u = buscarUsuarioPorId(usuarios, n, id);
             reativarUsuario(u);
             break;
-        }
+
         case 6:
-        {
             int id;
             cout << "Digite o ID do post: ";
             cin >> id;
@@ -464,61 +457,49 @@ int main()
             Post *post = buscarPostPorId(posts, p, id);
 
             if (post != nullptr)
-            {
                 cout << "Post encontrado: " << post->conteudo << endl;
-            }
-            else
-            {
+            else{
                 cout << "Post nao encontrado." << endl;
             }
             break;
-        }
+
         case 7:
-        {
             int id;
             cout << "ID do post para ocultar: ";
             cin >> id;
 
             Post *post = buscarPostPorId(posts, p, id);
-            if (post != nullptr)
-            {
+            if (post != nullptr){
                 ocultarPost(post);
                 cout << "Post ocultado com sucesso." << endl;
             }
             break;
-        }
+
         case 8:
-        {
             int id;
             cout << "ID do post para publicar: ";
             cin >> id;
 
             Post *post = buscarPostPorId(posts, p, id);
-            if (post != nullptr)
-            {
+            if (post != nullptr){
                 publicarPost(post);
                 cout << "Post publicado com sucesso." << endl;
             }
             break;
-        }
+
         case 9:
-        {
             int qtdPublicos;
             Post *publicos = filtrarPublicos(posts, p, &qtdPublicos);
 
             if (publicos == nullptr)
-            {
                 cout << "Nao ha posts publicos." << endl;
-            }
-            else
-            {
+            else{
                 exibirPosts(publicos, qtdPublicos, usuarios, n);
                 delete[] publicos;
             }
             break;
-        }
+
         case 10:
-        {
             int idUsuario, idPost;
 
             cout << "ID do usuario: ";
@@ -529,7 +510,7 @@ int main()
 
             registrarCurtida(matrizCurtidas, idUsuario, usuarios, n, idPost, posts, p);
             break;
-        }
+
         case 11:
             exibirMatriz(matrizCurtidas, n, p);
             break;
@@ -541,6 +522,7 @@ int main()
         default:
             cout << "Opcao invalida." << endl;
         }
+
     } while (opcao != 0);
 
     liberarMatriz(matrizCurtidas, n);
