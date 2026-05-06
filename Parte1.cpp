@@ -435,7 +435,6 @@ int main()
             }
             break;
         }
-
         case 4:
         {
             int id;
@@ -446,7 +445,6 @@ int main()
             suspenderUsuario(u);
             break;
         }
-
         case 5:
         {
             int id;
@@ -457,7 +455,6 @@ int main()
             reativarUsuario(u);
             break;
         }
-
         case 6:
         {
             int id;
@@ -476,7 +473,6 @@ int main()
             }
             break;
         }
-
         case 7:
         {
             int id;
@@ -491,7 +487,6 @@ int main()
             }
             break;
         }
-
         case 8:
         {
             int id;
@@ -506,7 +501,6 @@ int main()
             }
             break;
         }
-
         case 9:
         {
             int qtdPublicos;
@@ -523,7 +517,6 @@ int main()
             }
             break;
         }
-
         case 10:
         {
             int idUsuario, idPost;
@@ -537,7 +530,6 @@ int main()
             registrarCurtida(matrizCurtidas, idUsuario, usuarios, n, idPost, posts, p);
             break;
         }
-
         case 11:
             exibirMatriz(matrizCurtidas, n, p);
             break;
@@ -549,7 +541,6 @@ int main()
         default:
             cout << "Opcao invalida." << endl;
         }
-
     } while (opcao != 0);
 
     liberarMatriz(matrizCurtidas, n);
