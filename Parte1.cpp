@@ -69,8 +69,8 @@ Usuario *buscarUsuarioPorId(Usuario *v, int n, int id) // Busca por um usuário 
                 procurado = (v + i);
                 return procurado;
             }
-            cout << "Usuario nao encontrado." << endl;
         }
+        cout << "Usuario nao encontrado." << endl;
     }
     return nullptr;
 }
@@ -156,12 +156,21 @@ void lerPosts(Post *v, int p, Usuario *usuarios, int n)
                     cin >> (v + i)->publico;
                     cout << endl;
                 }
-                cout << endl
-                     << "Usuario: " << usuarioPublicador->username << " Suspenso.";
+                else
+                {
+                    cout << endl
+                    << "Usuario: " << usuarioPublicador->username << " Suspenso.";
+                    i--;
+                }
             }
-            // Caso id não for encontrado retrocede o codigo a i - 1(Volta ao cadastramento do mesmo post)
-            cout << "Erro: usuario com ID " << id << " nao encontrado. Informe novamente.";
-            i--;
+
+            else
+            {
+                // Caso id não for encontrado retrocede o codigo a i - 1(Volta ao cadastramento do mesmo post)
+                cout << "Erro: usuario com ID " << id << " nao encontrado. Informe novamente.";
+                i--;
+            }
+
         }
     }
 }
@@ -201,8 +210,8 @@ Post *buscarPostPorId(Post *v, int p, int id)
                 procurado = (v + i);
                 return procurado;
             }
-            cout << "Post nao encontrado." << endl;
         }
+        cout << "Post nao encontrado." << endl;
     }
     return nullptr;
 }
@@ -409,15 +418,17 @@ int main()
         cin >> opcao;
 
         switch (opcao){
-        case 1:
+        case 1:{
             exibirUsuarios(usuarios, n);
             break;
+        }
 
-        case 2:
+        case 2:{
             exibirPosts(posts, p, usuarios, n);
             break;
+        }
 
-        case 3:
+        case 3:{
             int id;
             cout << "Digite o ID do usuario: ";
             cin >> id;
@@ -430,8 +441,9 @@ int main()
                 cout << "Usuario nao encontrado." << endl;
             }
             break;
+        }
 
-        case 4:
+        case 4:{
             int id;
             cout << "ID do usuario para suspender: ";
             cin >> id;
@@ -439,8 +451,9 @@ int main()
             Usuario *u = buscarUsuarioPorId(usuarios, n, id);
             suspenderUsuario(u);
             break;
+        }
 
-        case 5:
+        case 5:{
             int id;
             cout << "ID do usuario para reativar: ";
             cin >> id;
@@ -448,8 +461,9 @@ int main()
             Usuario *u = buscarUsuarioPorId(usuarios, n, id);
             reativarUsuario(u);
             break;
+        }
 
-        case 6:
+        case 6:{
             int id;
             cout << "Digite o ID do post: ";
             cin >> id;
@@ -462,8 +476,9 @@ int main()
                 cout << "Post nao encontrado." << endl;
             }
             break;
+        }
 
-        case 7:
+        case 7:{
             int id;
             cout << "ID do post para ocultar: ";
             cin >> id;
@@ -474,8 +489,9 @@ int main()
                 cout << "Post ocultado com sucesso." << endl;
             }
             break;
+        }
 
-        case 8:
+        case 8:{
             int id;
             cout << "ID do post para publicar: ";
             cin >> id;
@@ -486,8 +502,9 @@ int main()
                 cout << "Post publicado com sucesso." << endl;
             }
             break;
+        }
 
-        case 9:
+        case 9:{
             int qtdPublicos;
             Post *publicos = filtrarPublicos(posts, p, &qtdPublicos);
 
@@ -498,8 +515,9 @@ int main()
                 delete[] publicos;
             }
             break;
+        }
 
-        case 10:
+        case 10:{
             int idUsuario, idPost;
 
             cout << "ID do usuario: ";
@@ -510,14 +528,17 @@ int main()
 
             registrarCurtida(matrizCurtidas, idUsuario, usuarios, n, idPost, posts, p);
             break;
-
-        case 11:
+        }
+    
+        case 11:{
             exibirMatriz(matrizCurtidas, n, p);
             break;
+        }
 
-        case 0:
+        case 0:{
             cout << "Encerrando programa..." << endl;
             break;
+        }
 
         default:
             cout << "Opcao invalida." << endl;
